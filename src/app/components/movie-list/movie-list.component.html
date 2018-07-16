@@ -1,0 +1,5 @@
+<div *ngIf="searchResults$ | async; let searchResults">
+    <div class="movie" *ngFor="let movie of searchResults.results">
+        <h2>{{movie.title}}</h2>
+    </div>
+</div>
