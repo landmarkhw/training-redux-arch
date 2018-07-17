@@ -1,5 +1,15 @@
-<div *ngIf="searchResults$ | async; let searchResults">
-    <div class="movie" *ngFor="let movie of searchResults.results">
+<div class="movie-container flex-row" *ngIf="searchResults$ | async; let searchResults">
+    <div
+        *ngFor="let movie of searchResults.results; let i = index;"
+        class="movie flex-col"
+        tabindex="{{i + 1}}"
+        title="{{movie.title}}">
+        <div *ngIf="movie.poster_path" class="poster">
+            <img src="https://image.tmdb.org/t/p/w300/{{movie.poster_path}}" />
+        </div>
         <h2>{{movie.title}}</h2>
+        <div class="overview">
+            {{movie.overview}}
+        </div>
     </div>
 </div>

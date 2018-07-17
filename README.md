@@ -1,6 +1,10 @@
-# TrainingReduxArch
+# Training - Redux Architecture
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+NOTE: This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+
+## Presentation
+
+This code is provided along with a presentation.  See the /presentation folder for the contents of the presentation
 
 ## Development server
 

@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+html, body {
+    font-family: 'Lato', sans-serif;
+}
+
+*:focus {
+    border: 2px dashed #0055cc !important;
+    outline: 0;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: stretch;
+}
+
+.flex-col {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+}

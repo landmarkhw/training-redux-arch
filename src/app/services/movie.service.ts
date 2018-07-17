@@ -5,6 +5,7 @@ import { NowPlayingSearchOptions, SearchResults } from "../models/themoviedb";
 const api_key = "431a59ce91710d2d84564d46c0e65729";
 const baseUrl = "https://api.themoviedb.org/3";
 
+
 @Injectable({
     providedIn: "root"
 })
@@ -21,6 +22,7 @@ export class MovieService {
     getNowPlaying(page: number) {
         const params: NowPlayingSearchOptions = {
             api_key,
+            include_adult: "false",
             page: `${page || 0}`,
         };
 
