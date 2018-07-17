@@ -1,0 +1,12 @@
+<div class="close-button" (click)="handleClose()">X</div>
+<div class="flex-row" style="justify-content: flex-start">
+    <div class="poster flex-col">
+        <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" />
+    </div>
+    <div class="details flex-col">
+        <h2>{{movie.title}}</h2>
+        <div class="overview">
+            {{movie.overview}}
+        </div>
+    </div>
+</div>

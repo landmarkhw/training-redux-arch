@@ -1,0 +1,48 @@
+:host {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.movie-container {
+    margin: 0 auto;
+}
+
+.movie {
+    border: 2px solid transparent;
+    cursor: pointer;
+    margin-bottom: 2em;
+    padding: 1em;
+    user-select: none;
+}
+
+.movie h2 {
+    overflow: hidden;
+    max-width: 300px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.movie .overview {
+    margin: 0 auto;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.close-button {
+    border: 2px solid black;
+    cursor: pointer;
+    font-size: 32px;
+    padding: 0.1em 0.25em;
+    position: absolute;
+    right: 1em;
+    top: 1em;
+}
+
+.details {
+    max-width: calc(100vw - 550px - 2em);
+    padding: 2em;
+}

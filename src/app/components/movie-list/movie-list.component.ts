@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
-import { SearchResults } from "../../models/themoviedb";
+import { SearchResults, SearchResult } from "../../models/themoviedb";
 import { MovieService } from "../../services/movie.service";
 
 @Component({
@@ -10,10 +10,19 @@ import { MovieService } from "../../services/movie.service";
 })
 export class MovieListComponent implements OnInit {
     searchResults$: Observable<SearchResults>;
+    selectedMovie: SearchResult;
 
     constructor(
         private movieService: MovieService,
     ) {}
+
+    handleClick(movie: SearchResult) {
+        this.selectedMovie = movie;
+    }
+
+    handleClose() {
+        this.selectedMovie = null;
+    }
 
     ngOnInit() {
         this.searchResults$ = this.movieService.getNowPlaying(1);
