@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://use.fontawesome.com/releases/v5.1.0/css/all.css');
 
 html, body {
     font-family: 'Lato', sans-serif;

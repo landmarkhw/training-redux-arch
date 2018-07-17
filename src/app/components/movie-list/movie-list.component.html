@@ -1,24 +1,24 @@
-<div *ngIf="selectedMovie; else movieList">
-    <app-movie-details
-        (close)="handleClose()"
-        [movie]="selectedMovie">
-    </app-movie-details>
-</div>
-<ng-template #movieList>
-    <div class="movie-container flex-row" *ngIf="searchResults$ | async; let searchResults">
-        <div
-            *ngFor="let movie of searchResults.results; let i = index;"
-            (click)="handleClick(movie)"
-            class="movie flex-col"
-            tabindex="{{i + 1}}"
-            title="{{movie.title}}">
-            <div *ngIf="movie.poster_path" class="poster">
-                <img src="https://image.tmdb.org/t/p/w300/{{movie.poster_path}}" />
-            </div>
-            <h2>{{movie.title}}</h2>
-            <div class="overview">
-                {{movie.overview}}
-            </div>
+<app-movie-details
+    [class]="selectedMovie ? 'active' : ''"
+    (close)="handleClose()"
+    [movie]="selectedMovie">
+</app-movie-details>
+
+<div
+    *ngIf="searchResults$ | async; let searchResults"
+    [class]="'movie-container flex-row' + (selectedMovie ? '' : ' active')">
+    <div
+        *ngFor="let movie of searchResults.results; let i = index;"
+        (click)="handleClick(movie)"
+        class="movie flex-col"
+        tabindex="{{i + 1}}"
+        title="{{movie.title}}">
+        <div *ngIf="movie.poster_path" class="poster">
+            <img src="https://image.tmdb.org/t/p/w300/{{movie.poster_path}}" />
+        </div>
+        <h2>{{movie.title}}</h2>
+        <div class="overview">
+            {{movie.overview}}
         </div>
     </div>
-</ng-template>
+</div>
