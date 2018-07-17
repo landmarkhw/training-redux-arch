@@ -12,6 +12,11 @@ export class MovieDetailsComponent {
 
     constructor() { }
 
+    get stars() {
+        const starCount = Math.floor(this.movie.vote_average / 2);
+        return new Array(starCount).fill(0).map(i => i);
+    }
+
     handleClose() {
         this.close.emit(true);
     }
