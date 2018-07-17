@@ -11,7 +11,7 @@ app-movie-details.active {
 
 .movie-container {
     margin: 0 auto;
-    transform: translateX(100vw);
+    transform: translateX(-100vw);
     transition: transform 1s;
 }
 .movie-container.active {
