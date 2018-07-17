@@ -137,15 +137,57 @@ a:focus {
 */
 
 h1 {
+    display: block;
     font-size: 2em;
+    font-variant: small-caps;
+    margin-bottom: 0.5em;
 }
 h2 {
+    display: block;
     font-size: 1.6em;
+    font-variant: small-caps;
+    margin-bottom: 0.4em;
 }
 h3 {
+    display: block;
     font-size: 1.4em;
+    font-variant: small-caps;
+    margin-bottom: 0.3em;
 }
 q {
+    display: block;
+    font-style: italic;
+}
+ul {
+    margin: 1em 0;
+}
+ul li {
+    display: list-item;
+    list-style-type: disc;
+    margin: 0.25em 1em;
+}
+code {
+    display: block;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+    margin: 1em 0;
+    white-space: pre;
+}
+code .L0,
+code .L1,
+code .L2,
+code .L3,
+code .L4,
+code .L5,
+code .L6,
+code .L7,
+code .L8,
+code .L9 {
+    line-height: 1.8em;
+}
+title {
+    display: block;
+    font-size: 1.4em;
     font-style: italic;
 }
 
