@@ -21,7 +21,6 @@ app-movie-details.active {
 .movie {
     border: 2px solid transparent;
     cursor: pointer;
-    margin-bottom: 2em;
     padding: 1em;
     user-select: none;
 }
@@ -45,6 +44,6 @@ app-movie-details.active {
     text-align: center;
 }
 .poster img {
-    box-shadow: 5px 5px 5px #888888;
+    box-shadow: 10px 10px 30px #111111;
 }
 
