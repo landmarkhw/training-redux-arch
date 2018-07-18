@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { SearchResult } from "src/app/models/themoviedb";
+import { get5StarRating } from "../../selectors/movie.selectors";
 
 @Component({
     selector: "app-movie-details",
@@ -12,9 +13,14 @@ export class MovieDetailsComponent {
 
     constructor() { }
 
+    get5StarRating() {
+        return get5StarRating(this.movie);
+    }
+
     get stars() {
-        const starCount = Math.floor(this.movie.vote_average / 2);
-        return new Array(starCount).fill(0).map(i => i);
+        const rating = get5StarRating(this.movie);
+        // Create an array with one element per star
+        return new Array(rating).fill(0).map(i => i);
     }
 
     handleClose() {

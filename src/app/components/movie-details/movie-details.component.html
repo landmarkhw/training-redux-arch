@@ -1,9 +1,12 @@
 <div style="vertical-align: middle;">
     <button class="close-button" (click)="handleClose()"><span class="fas fa-arrow-left"></span></button>
     <h2 class="title">{{movie?.title}}</h2>
-    <div title="{{movie.vote_average / 2 }}" style="display: inline-block; padding-left: 1em;">
+    <div
+        *ngIf="get5StarRating() as rating"
+        style="display: inline-block; padding-left: 1em;"
+        title="{{rating}}">
         <span class="fas fa-star" *ngFor="let star of stars"></span>
-        ({{movie.vote_average / 2}})
+        ({{rating}})
     </div>
 </div>
 <div class="flex-row" style="justify-content: flex-start">
