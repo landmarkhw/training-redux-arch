@@ -61,6 +61,10 @@ This file is a pretty standard Angular component:
 
 In Part 2, `ngrx/store` has been added.  Run `git checkout part2` to see the changes to the code.
 
+### Workshop Tasks
+
+#### Task 1: 
+
 ---------------
 
 ## Angular CLI
