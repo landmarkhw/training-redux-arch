@@ -53,7 +53,12 @@ This file is a pretty standard Angular component:
 #### Task 3: Look at `movie.service.ts`:
 
 1. Calls `themoviedb.org`'s API
-2. Uses an `api_key` specifically meant for this workshop.
+1. Uses an `api_key` specifically meant for this workshop.
+
+#### Task 4: Look at `movie-details-component.html`:
+
+Notice that there's business logic here: `{{movie.vote_average / 2 }}`
+We want to display the movie rating as a 5-star rating, whereas the data is based on a 1-10 rating.  This business logic is currently happening directly in the view (hint: not good).
 
 ---------------
 
@@ -61,9 +66,44 @@ This file is a pretty standard Angular component:
 
 In Part 2, `ngrx/store` has been added.  Run `git checkout part2` to see the changes to the code.
 
+This part is all about <em>Separation of Concerns</em> - we begin using the Redux architecture to separate different responsibilties into different areas of the application.
+
+#### Summary
+
+1. `ngrx/store` has been installed and added to `app.module.ts`
+1. `movie.actions.ts` has been added, in a new folder - `actions`
+1. `movie.reducers.ts` has been added, in a new folder - `reducers`
+1. `movie.service.ts` now dispatches (e.g. publishes) the `GotSearchResults` action, which is reduced (saved) to state in the `movieReducer`.
+1. `movie-list.component.ts` now gets its search results by `select`ing (retrieving) it from the Redux store.
+
 ### Workshop Tasks
 
-#### Task 1: 
+#### Task 1: Look at `movie.actions.ts`
+
+1. This file is in a new folder - `actions`.  This helps us organize the different parts of the application that have different responsibilities.
+1. This file defines the actions that are available for the `movie` area of the application (which is currently the whole app).
+1. The `MovieActionTypes` object is simply a collection of string constants that are used to uniqueqly identify each action.
+1. The `GotSearchResultsAction` is a TypeScript definition of the one action we have - `GotSearchResults`
+1. The `MovieActions` object is a collection of action creators that are used to create actions when they occur.
+    * Note that actions in Redux are just plain old JavaScript objects.  They have a `type`, which is a string constant that identifies what kind of action it is, and they have a `payload`, which is the data associated with the action.
+
+#### Task 2: Look at `movie.reducer.ts`
+
+1. This file is in a new folder - 'reducers'.  This helps us group all our reducers in one area.
+1. This file does 2 things:
+    * Defines the shape of state for the `movie` area of the application (again, currently the whole app).
+    * Defines a `reducer`, which is a function that, given the current `state` of the application and an `action` that's happening in the store, returns a new `state`.
+1. Reducers are commonly built with a `switch` statement - they only respond to the actions that affect this part of the application's state.
+    * In this case, the reducer is reacting to the `MovieActionTypes.GotSearchResults` action, by saving the data from the API call into state.
+1. You'll also notice that the reducer defines the `defaultState` of that area of the application.  This is what the state looks like before any changes are made.
+
+#### Task 3: Look at `movie.service.ts`
+
+1 change: instead of returning `this.http.get(...)` directly, we're subscribing to the results and `dispatch`ing an action to the store with the search results.
+
+#### Task 4: Look at `movie-list.component.ts`
+
+1 change: instead of getting `searchResults$` directly from the `movieService`, we are instead retrieving the data from the `store`.  Now the `store` is the "source of truth" for that data.
 
 ---------------
 
