@@ -181,11 +181,42 @@ It turns out, the answer to this is both "yes", and "no":
     * Note that this rarely includes making API calls - those are best done elsewhere.
 1. Otherwise, side-effects should be contained elsewhere.
 
+In this case, we move the `movieService.getNowPlaying()` call from the `movie-list.component.ts` file into an effect.
+As you've probably guessed, this helps us further *separate our concerns*.
+
 #### @ngrx/effects
 
 The @ngrx/effects library uses RxJS to address the question of "where should my side-effects go?"
 
 `Effects` in @ngrx are RxJS Observables that watch `actions` pass through the Redux `store`.
+
+#### New file `defs.ts`
+
+I've added the `defs.ts` file, which has some helper interfaces and functions for creating and working with actions/action creators.
+
+#### Task 1: look at `movie.actions.ts`
+
+1. Removed the `GotSearchResults` action
+1. Added new `Search` action, an async action
+    * Async actions are simply a collection of normal actions:
+        * BEGIN - the action is beginning, usually triggers some action or API call
+        * FAILURE - the action has failed
+        * SUCCESS - the action has succeeded
+        * UPDATE - triggered when a long-running action publishes a status update
+1. Updated `MovieActions` - see line 18.
+    * `NowPlayingSearchOptions` - the data passed to the BEGIN action.
+    * `SearchResults` - the data passed to the SUCCESS action.
+    * `MovieActionTypes.Search` - the type of action being created.
+
+#### Task 2: look at `movie-list.component.ts`
+
+1. Instead of calling the `MovieService` directly, we now dispatch an action 
+
+#### Task 3: look at `movie.effects.ts`
+
+1. The `MovieService` API is called here, when we see the `MovieActionTypes.Search.BEGIN` action occur.
+1. If the `MovieService` succeeds, it dispatches the `MovieActionTypes.Search.SUCCESS` action.
+1. If the `MovieService` fails, it dispatches the `MovieActionTypes.Search.FAILURE` action.
 
 ---------------
 
