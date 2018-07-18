@@ -198,10 +198,14 @@ I've added the `defs.ts` file, which has some helper interfaces and functions fo
 
 1. Removed the `GotSearchResults` action
 1. Added new `Search` action, an async action
-    * Async actions are simply a collection of normal actions:
+    * We did this since we have multiple actions that we need to represent now:
+        * 1st action - call the API
+        * 2nd action - receive results from the API
+        * 3rd action - handle any failures from the API
+    * Async actions do this for us.  They are simply a collection of normal actions:
         * BEGIN - the action is beginning, usually triggers some action or API call
-        * FAILURE - the action has failed
         * SUCCESS - the action has succeeded
+        * FAILURE - the action has failed
         * UPDATE - triggered when a long-running action publishes a status update
 1. Updated `MovieActions` - see line 18.
     * `NowPlayingSearchOptions` - the data passed to the BEGIN action.
