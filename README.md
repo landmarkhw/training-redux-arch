@@ -66,6 +66,16 @@ We want to display the movie rating as a 5-star rating, whereas the data is base
 
 In Part 2, `ngrx/store` has been added.  Run `git checkout part2` to see the changes to the code.
 
+This part is all about <em>Separation of Concerns</em> - we begin using the Redux architecture to separate different responsibilties into different areas of the application.
+
+#### Summary
+
+1. `ngrx/store` has been installed and added to `app.module.ts`
+1. `movie.actions.ts` has been added, in a new folder - `actions`
+1. `movie.reducers.ts` has been added, in a new folder - `reducers`
+1. `movie.service.ts` now dispatches (e.g. publishes) the `GotSearchResults` action, which is reduced (saved) to state in the `movieReducer`.
+1. `movie-list.component.ts` now gets its search results by `select`ing (retrieving) it from the Redux store.
+
 ### Workshop Tasks
 
 #### Task 1: Look at `movie.actions.ts`
@@ -79,6 +89,7 @@ In Part 2, `ngrx/store` has been added.  Run `git checkout part2` to see the cha
 
 #### Task 2: Look at `movie.reducer.ts`
 
+1. This file is in a new folder - 'reducers'.  This helps us group all our reducers in one area.
 1. This file does 2 things:
     * Defines the shape of state for the `movie` area of the application (again, currently the whole app).
     * Defines a `reducer`, which is a function that, given the current `state` of the application and an `action` that's happening in the store, returns a new `state`.
@@ -88,11 +99,11 @@ In Part 2, `ngrx/store` has been added.  Run `git checkout part2` to see the cha
 
 #### Task 3: Look at `movie.service.ts`
 
-One thing changed here - instead of returning `this.http.get(...)` directly, we're subscribing to the results and `dispatch`ing an action to the store with the search results.
+1 change: instead of returning `this.http.get(...)` directly, we're subscribing to the results and `dispatch`ing an action to the store with the search results.
 
-#### Task 4: Look at `movie-list-component.ts`
+#### Task 4: Look at `movie-list.component.ts`
 
-One thing changed here - instead of getting `searchResults$` directly from the `movieService`, we are instead retrieving the data from the `store`.  Now the `store` is the "source of truth" for that data.
+1 change: instead of getting `searchResults$` directly from the `movieService`, we are instead retrieving the data from the `store`.  Now the `store` is the "source of truth" for that data.
 
 ---------------
 
