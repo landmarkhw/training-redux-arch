@@ -17,6 +17,11 @@ export class MovieDetailsComponent {
         return get5StarRating(this.movie);
     }
 
+    /**
+     * Returns an array based on the number of stars in the 5-star rating:
+     * e.g. [1,2,3,4,5] for a 5-star rating.
+     * e.g. [1,2,3] for a 3-star rating.
+     */
     get stars() {
         const rating = Math.floor(get5StarRating(this.movie));
         return new Array(rating).fill(0).map(i => i);
