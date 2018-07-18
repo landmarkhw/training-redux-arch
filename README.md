@@ -152,6 +152,43 @@ As with other `pure` functions, selectors can easily be unit tested when necessa
 
 ---------------
 
+## Part 4
+
+In Part 4, [effects](https://github.com/ngrx/platform/tree/master/docs/effects) have been added.  Run `git checkout part4` to see the changes to the code.
+
+This part adds an important piece to *Separation of Concerns* with ngrx:  Side-effect handling.
+
+As mentioned before, `reducers` and `selectors` are both `pure` functions:  They cannot produce side-effects.
+
+#### Side-Effects
+
+A few examples of side-effects are:
+
+1. Calling an API
+1. Mutating data
+1. Logging to console or file
+1. DOM manipulation
+1. Calling other functions that are not `pure` (e.g. `Math.random()`)
+    * `new Date()` - as it uses the current time, it's not `pure`
+
+#### Best Practice
+
+OK, so `reducers` and `selectors` can't have side-effects.  What about our `view` -- it seems like that's the most logical place for these side-effects to go.
+
+It turns out, the answer to this is both "yes", and "no":
+
+1. If the `view` has side-effects that are scoped directly to that view, then it's OK for it to contain its own side-effects.
+    * Note that this rarely includes making API calls - those are best done elsewhere.
+1. Otherwise, side-effects should be contained elsewhere.
+
+#### @ngrx/effects
+
+The @ngrx/effects library uses RxJS to address the question of "where should my side-effects go?"
+
+`Effects` in @ngrx are RxJS Observables that watch `actions` pass through the Redux `store`.
+
+---------------
+
 ## Angular CLI
 
 To get help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
