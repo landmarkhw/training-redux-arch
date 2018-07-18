@@ -4,14 +4,16 @@ This is a multipart training workshop, aimed at teaching you the basic principle
 
 We'll be using the following technologies in this workshop:
 
-* Angular 6
-* Angular CLI 6
-* ngrx/store 6
-* ngrx/effects 6
+* Angular
+* Angular CLI
+* ngrx/store
+* ngrx/effects
 
 ## Presentation
 
 The presentation is provided along with the workshop.  Simply open the `/presentation` folder and run the `run.cmd` file.  The presentation should automatically open at http://localhost:8000.
+
+Note that you must have *Python* installed to run the `run.cmd` command.  Alternatively, you can probably just open `index.html` directly to view the presentation.
 
 ---------------
 
@@ -66,11 +68,12 @@ We want to display the movie rating as a 5-star rating, whereas the data is base
 
 In Part 2, `ngrx/store` has been added.  Run `git checkout part2` to see the changes to the code.
 
-This part is all about <em>Separation of Concerns</em> - we begin using the Redux architecture to separate different responsibilties into different areas of the application.
+This part is all about *Separation of Concerns* - we begin using the Redux architecture to separate different responsibilties into different areas of the application.
 
-#### Summary
+#### Summary of Changes
 
 1. `ngrx/store` has been installed and added to `app.module.ts`
+1. `ngrx/store-devtools` has been installed.  This allows you to use [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) to watch what's happening in Redux (actions & state).
 1. `movie.actions.ts` has been added, in a new folder - `actions`
 1. `movie.reducers.ts` has been added, in a new folder - `reducers`
 1. `movie.service.ts` now dispatches (e.g. publishes) the `GotSearchResults` action, which is reduced (saved) to state in the `movieReducer`.
@@ -96,6 +99,11 @@ This part is all about <em>Separation of Concerns</em> - we begin using the Redu
 1. Reducers are commonly built with a `switch` statement - they only respond to the actions that affect this part of the application's state.
     * In this case, the reducer is reacting to the `MovieActionTypes.GotSearchResults` action, by saving the data from the API call into state.
 1. You'll also notice that the reducer defines the `defaultState` of that area of the application.  This is what the state looks like before any changes are made.
+1. An important note: Reducers are [pure functions](https://medium.com/@jamesjefferyuk/javascript-what-are-pure-functions-4d4d5392d49c).
+    * Given a set of input data, the same output is returned.
+    * Cannot produce side-effects
+
+Being `pure` functions, reducers provide us many guarantees, along with being unit-testable.
 
 #### Task 3: Look at `movie.service.ts`
 
@@ -103,7 +111,44 @@ This part is all about <em>Separation of Concerns</em> - we begin using the Redu
 
 #### Task 4: Look at `movie-list.component.ts`
 
-1 change: instead of getting `searchResults$` directly from the `movieService`, we are instead retrieving the data from the `store`.  Now the `store` is the "source of truth" for that data.
+1 change: instead of getting `searchResults$` directly from the `movieService`, we are instead retrieving the data from the `store`.  Now the `store` is the "source of truth" for that data.  One problem - we're manually navigating the state in the `store` to find the information we need.  This can create some tightly-coupled situations where the view is tightly-coupled with the shape of state.  In the next part, we'll look at how to address this problem.
+
+---------------
+
+## Part 3
+
+In Part 3, [selectors](https://github.com/ngrx/platform/blob/master/docs/store/selectors.md) have been added to the mix.  Run `git checkout part3` to see the changes to the code.
+
+This part further *separates our concerns* - we address a couple of problems we noticed earlier:
+
+1. Business logic is found in the view
+1. Tight coupling of view to the shape of state
+
+#### Summary of Changes
+
+1. `movie.selectors.ts` has been added, in a new folder - `selectors`
+1. `movie-list.component.ts` uses the new selector `getSearchResultList`
+    * This decouples the view from the shape of the state.  Now, if the shape of state changes, we can simply modify the `getSearchResultList` selector accordingly, and the view is unaffected.
+1. `movie-details.component.ts` and `movie-details.component.html` use the new selector `get5StarRating`
+    * This moves business logic out of the view and into selectors.
+
+#### Task 1: Look at `movie.selectors.ts`
+
+New file - added 2 selectors
+    * `getSearchResultList` - gets a list of movie search results from state
+    * `get5StarRating` - gets the 5-star rating for a movie search result
+
+Note that, like reducers, selectors are [pure functions](https://medium.com/@jamesjefferyuk/javascript-what-are-pure-functions-4d4d5392d49c).
+
+As with other `pure` functions, selectors can easily be unit tested when necessary.
+
+#### Task 2: Look at `movie-list.component.ts`
+
+1 change - uses the `getSearchResultList` selector.  Note that it's passed directly to the `select()` function.
+
+#### Task 3: Look at `movie-details.component.ts` and `movie-details.component.html`
+
+2 changes - added `get5StarRating()` method and use it in the html template.
 
 ---------------
 
