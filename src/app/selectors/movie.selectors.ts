@@ -18,4 +18,9 @@ export const getSearchResultList = (state: AppState) => {
  * Gets the 5-star rating for a search result (rounded to 1 decimal place)
  * @param searchResult themoviedb.org search result.
  */
-export const get5StarRating = (searchResult: SearchResult) => parseFloat(searchResult.vote_average.toFixed(1));
+export const get5StarRating = (searchResult: SearchResult) => {
+    if (searchResult && searchResult.vote_average) {
+        return parseFloat((searchResult.vote_average / 2).toFixed(1));
+    }
+    return 0;
+}

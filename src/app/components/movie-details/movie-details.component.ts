@@ -18,8 +18,7 @@ export class MovieDetailsComponent {
     }
 
     get stars() {
-        const rating = get5StarRating(this.movie);
-        // Create an array with one element per star
+        const rating = Math.floor(get5StarRating(this.movie));
         return new Array(rating).fill(0).map(i => i);
     }
 
