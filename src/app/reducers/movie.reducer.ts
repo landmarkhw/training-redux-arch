@@ -30,7 +30,8 @@ export function movieReducer(state = defaultState, action: GotSearchResultsActio
         case MovieActionTypes.GotSearchResults: {
             // Create an immutable copy of state.  This is one of the main rules
             // of a reducer -- it MUST return immutable state.
-            // This makes the reducer a `pure` function.
+            // This makes the reducer a `pure` function -- we don't modify
+            // state directly, but clone it first, and then modify the clone.
             return Object.assign({}, state, {
                 searchResults: action.payload
             } as MovieState);
