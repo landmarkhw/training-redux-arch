@@ -24,19 +24,16 @@ export class MovieService {
     /**
      * Returns an observable of movies that are now playing.
      */
-    getNowPlaying(page: number) {
-        const params: NowPlayingSearchOptions = {
-            api_key,
-            include_adult: "false",
-            page: `${page || 0}`,
-        };
+    getNowPlaying(request: NowPlayingSearchOptions) {
+        request = Object.assign(
+            {},
+            {
+                api_key,
+                include_adult: "false",
+            } as NowPlayingSearchOptions,
+            request
+        );
 
-        this.http
-            .get<SearchResults>(this.url("movie/now_playing"), { params })
-            .subscribe(searchResults => {
-                // Whenever search results are retrieved, dispatch an action
-                // that notifies others of the search results.
-                this.store.dispatch(MovieActions.gotSearchResults(searchResults));
-            });
+        return this.http.get<SearchResults>(this.url("movie/now_playing"), { params: request });
     }
 }

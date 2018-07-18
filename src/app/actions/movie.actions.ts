@@ -1,18 +1,11 @@
-import { SearchResults } from "../models/themoviedb";
+import { SearchResults, NowPlayingSearchOptions } from "../models/themoviedb";
+import { AsyncAction, createAsyncActions } from "./defs";
 
 /**
  * A list of string constants for each type of action that can be dispatched.
  */
 export const MovieActionTypes = {
-    GotSearchResults: "@landmark/demo/movie/gotSearchResults",
-};
-
-/**
- * An action type for getting search results.
- */
-export interface GotSearchResultsAction {
-    type: string;
-    payload: SearchResults;
+    Search: AsyncAction("movie/search"),
 };
 
 /**
@@ -20,10 +13,7 @@ export interface GotSearchResultsAction {
  */
 export const MovieActions = {
     /**
-     * An action creator called when the API has successfully retrieved search results.
+     * Searches for movies.
      */
-    gotSearchResults: (searchResults: SearchResults) => ({
-        type: MovieActionTypes.GotSearchResults,
-        payload: searchResults,
-    }) as GotSearchResultsAction,
+    search: createAsyncActions<NowPlayingSearchOptions, SearchResults>(MovieActionTypes.Search),
 };

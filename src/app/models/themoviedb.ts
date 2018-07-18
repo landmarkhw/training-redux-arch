@@ -1,5 +1,6 @@
 export interface MovieDbRequest {
-    api_key: string;
+    api_key?: string;
+    include_adult?: string;
 }
 
 export interface MovieDates {

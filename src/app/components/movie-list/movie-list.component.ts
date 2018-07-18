@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
+import { MovieActions } from "../../actions/movie.actions";
 import { SearchResult } from "../../models/themoviedb";
 import { AppState } from "../../reducers";
 import { getSearchResultList } from "../../selectors/movie.selectors";
-import { MovieService } from "../../services/movie.service";
 
 @Component({
     selector: "app-movie-list",
@@ -16,7 +16,6 @@ export class MovieListComponent implements OnInit {
     selectedMovie: SearchResult = null;
 
     constructor(
-        private movieService: MovieService,
         private store: Store<AppState>,
     ) {
         // Get the search results from the store -- this means our component
@@ -34,7 +33,8 @@ export class MovieListComponent implements OnInit {
     }
 
     ngOnInit() {
-        // Call themoviedb API to get movies playing now
-        this.movieService.getNowPlaying(1);
+        // NOTE: instead of calling the API directly here, we now dispatch
+        // an action to perform the search.
+        this.store.dispatch(MovieActions.search.begin({ page: "1" }));
     }
 }
