@@ -339,28 +339,87 @@
 
     <div id="client-overview" class="step" data-x="0" data-y="600" data-z="0" data-rotate-y="-90" data-scale="2.2"></div>
 
-    <div id="traditional-way" class="step" data-x="-2000" data-y="1500" data-z="0" data-rotate-y="90" style="padding: 1em; border: 2px solid #888; width:800px">
+    <div id="traditional-way" class="step card" data-x="-3000" data-y="2000" data-z="0" data-rotate-x="90" data-rotate-z="-90">
         <h2>MVC</h2>
         <q>"The traditional way"</q>
 
         <p>Front-end engineers looked toward reliable methods to separate concerns.  The "MVC" pattern
         has existed since the late 70's.  It worked wonderfully with thin clients, and has been a staple for developers ever since.</p>
 
-        <p>Then, client-side code proliferated front-end development, and engineers started seeing big problems:</p>
+        <p>Most companies used some variety of MVC (MVVM, MVP), but engineers kept running into big problems:</p>
         <ul>
             <li>Complexity</li>
             <li>Performance</li>
             <li>Scalability</li>
         </ul>
 
+        <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/nYkdrAPrdcw?start=438"
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+            style="margin-left: 120px">
+        </iframe>
+
         <div class="notes">
             <ul>
-                <li>Facebook invented something called Flux:</li>
-                <li>I'll post it to Slack: <a href ="https://youtu.be/nYkdrAPrdcw?t=7m17s">https://youtu.be/nYkdrAPrdcw?t=7m17s</a></li>
+                <li>I can post this video to slack if anyone wants it: <a href ="https://youtu.be/nYkdrAPrdcw?t=7m17s">https://youtu.be/nYkdrAPrdcw?t=7m17s</a></li>
             </ul>
         </div>
     </div>
-    <div id="overview" class="step" data-x="-1000" data-y="0" data-z="0" data-scale="5"></div>
+
+    <div id="flux" class="step card" data-x="-2000" data-y="2000" data-z="0" data-rotate-x="90" data-rotate-z="-90">
+        <h2>Flux</h2>
+        <q>"The Facebook way"</q>
+
+        <p>Facebook's answer to the MVC complexity was a design pattern they named "Flux". It moves away from MVC completely and replaces it with the following concepts:</p>
+        <ul>
+            <li>Actions</li>
+            <li>Reducers</li>
+            <li>Store</li>
+        </ul>
+
+        <div class="notes">
+            <ul>
+                <li>Actions are what they sound - are in charge of notifying others when events are happening in the application.</li>
+                <li>Reducers - are named after the JavaScript Array `reduce` method, they are in charge of changing application state.</li>
+                <li>Store - is where the application's state is stored.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="flux-redux" class="step fade-in" data-x="-1400" data-y="2000" data-z="0" data-rotate-x="90" data-rotate-z="-90" style="text-align: center; width:1000px">
+        <h1>Wait, aren't we talking about Redux?</h1>
+    </div>
+
+    <div id="redux-diagram" class="step card fade-in" data-x="-800" data-y="2000" data-z="0" data-rotate-x="90" data-rotate-z="-90" style="text-align: center">
+        <img src="images/redux.png" />
+
+        <div class="notes">
+            <ul>
+                <li>In practice, it looks like this.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="redux-less-complex" class="step fade-in" data-x="-200" data-y="2000" data-z="0" data-rotate-x="90" data-rotate-z="-90" style="text-align: center; width:1000px;">
+        <h1>Wait, that's <strong>LESS</strong> complex?</h1>
+        <q>MVC only has 3 pieces, this has 4!</q>
+
+        <div class="notes">
+            <ul>
+                <li>Redux comes with its own complexity, so why should we go with it?</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="redux-complexity" class="step card fade-in" data-x="400" data-y="2000" data-z="0" data-rotate-x="90" data-rotate-z="-90" style="text-align: center">
+        <img src="images/redux-complexity.png" />
+    </div>
+
+    <div id="overview" class="step" data-x="-1000" data-y="1000" data-z="0" data-scale="6"></div>
 </div>
 
 <!--
