@@ -1,5 +1,3 @@
-import { InjectionToken } from "@angular/core";
-import { ActionReducerMap } from "@ngrx/store";
 import { movieReducer, MovieState } from "./movie.reducer";
 
 /**
