@@ -1,8 +1,8 @@
 <!-- The app-movie-details component displays the movie after it's been selected -->
 <app-movie-details
-    [class]="selectedMovie ? 'active' : ''"
+    [class]="(selectedMovie$ | async) ? 'active' : ''"
     (close)="handleClose()"
-    [movie]="selectedMovie">
+    [movie]="(selectedMovie$ | async)">
 </app-movie-details>
 
 <!--
@@ -17,7 +17,7 @@
         is created over and over for each movie in the list.
 -->
 <div
-    [class]="'movie-container flex-row' + (selectedMovie ? '' : ' active')">
+    [class]="'movie-container flex-row' + ((selectedMovie$ | async) ? '' : ' active')">
     <div
         *ngFor="let movie of searchResults$ | async; let i = index;"
         (click)="handleClick(movie)"

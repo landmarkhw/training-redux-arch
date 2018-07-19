@@ -31,3 +31,11 @@ export const get5StarRating = (searchResult: SearchResult) => {
     }
     return 0;
 }
+
+/**
+ * Gets the currently-selected movie.
+ */
+export const getSelectedMovie = createSelector(
+    getMovieState,
+    movie => movie.selectedMovie
+);
