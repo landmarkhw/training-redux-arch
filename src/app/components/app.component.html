@@ -1,1 +1,10 @@
-<app-movie-list></app-movie-list>
+<!-- The app-movie-details component displays the movie after it's been selected -->
+<app-movie-details
+    [class]="(selectedMovie$ | async) ? 'active' : ''"
+    (close)="handleClose()"
+    [movie]="(selectedMovie$ | async)">
+</app-movie-details>
+
+<app-movie-list
+    [class]="(selectedMovie$ | async) ? '' : 'active'">
+</app-movie-list>

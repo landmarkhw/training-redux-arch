@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { MovieActions } from "../../actions/movie.actions";
@@ -13,7 +13,6 @@ import { getSearchResultList, getSelectedMovie } from "../../selectors/movie.sel
 })
 export class MovieListComponent implements OnInit {
     searchResults$: Observable<SearchResult[]>;
-    selectedMovie$: Observable<SearchResult>;
 
     constructor(
         private store: Store<AppState>,
@@ -22,17 +21,10 @@ export class MovieListComponent implements OnInit {
         // is no longer the "source of truth" for the list of movies returned.
         // The store can provide that list of movies to other components, if they need it.
         this.searchResults$ = this.store.select(getSearchResultList);
-
-        // Get the selected movie from the store.
-        this.selectedMovie$ = this.store.select(getSelectedMovie);
     }
 
     handleClick(movie: SearchResult) {
         this.store.dispatch(MovieActions.select(movie));
-    }
-
-    handleClose() {
-        this.store.dispatch(MovieActions.select(null));
     }
 
     ngOnInit() {
