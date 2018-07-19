@@ -268,9 +268,15 @@ More on that in another training...
 
 1. In `movie-list.component.html`,
     * Move the <app-movie-details> node into `app.component.html`.
-1. In `movie-list.compoennt.ts`,
+1. In `movie-list.component.ts`,
     * Move the `selectedMovie$` field to `app.component.ts`.
     * Move the `handleClose()` function to `app.component.ts`.
+1. In `movie-list.component.css`,
+    * Move the `app-movie-details` CSS rules to `app.component.css`.
+    * Change the rule `.movie-container.active {` to `:host.active .movie-container {`
+        * This is because we're moving the responsibility of telling us which component is `active` to the `app` component.
+1. In `movie-list.component.html`,
+    * Change the line starting with `[class]` line to read `class="movie-container flex-row"`
 
 That's it!  You've so completely decoupled the `selectedMovie` from the `movie-list` state, that you can
 select (or deselect) a movie from either the `movie-list` component or the `movie-details` component.
