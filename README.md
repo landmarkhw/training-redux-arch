@@ -224,6 +224,64 @@ I've added the `defs.ts` file, which has some helper interfaces and functions fo
 
 ---------------
 
-## Angular CLI
+## Part 5
 
-To get help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+There are still some concerns remaining that should be separated, that haven't been mentioned yet:
+
+1. The `selectedMovie` is tracked from the `movie-list` component, but this information is useful for other parts of the application.
+1. The `movie-list` component currently *contains* the `movie-details` component, and is responsible to provide all data to it.  This dependency should be eliminated.
+
+This final part of the workshop will involve (finally), you doing some coding.  Since this is a brand new concept,
+and for many (most) of you, Angular is a new technology, I'll walk you through it step-by-step.
+
+Note that you should **not** checkout the "part5" branch unless you want to see the end result without doing the work.
+
+#### Task 1: Move the `selectedMovie` into Redux state.
+
+1. In `movie.actions.ts`,
+    * Add `Select: Action("movie/select"),` to the `MovieActionTypes` object.
+    * Add `select: createAction<SearchResult>(MovieActionTypes.Select),` to the `MovieActions` object.
+1. In `movie.reducers.ts`,
+    * Add `selectedMovie: SearchResult;` to the `MovieState` interface.
+    * Add `selectedMovie: null,` to the `defaultState` object.
+1. In `movie.reducers.ts`,
+    * Create a `case` statement for the `MovieActionTypes.Select` action type.
+    * Return a new state using Object.assign() that sets the `selectedMovie`.
+1. In `movie.selectors.ts`,
+    * Create a new selector `getSelectedMovie` that returns the `selectedMovie` from the `movie` state.
+1. In `movie-list.component.ts`,
+    * Remove the `selectedMovie` field.
+    * Add a new `selectedMovie$` field.  Note that the `$` suffix is called ["Finnish Notation"](https://medium.com/@benlesh/observables-and-finnish-notation-df8356ed1c9b), and indicates that the variable is Observable.
+    * Set the `selectedMovie$` field like we set `searchResults$` - `this.selectedMovie$ = this.store.select(getSelectedMovie);`
+    * Change `handleClick` to instead dispatch the `MovieActions.select` action: `this.store.dispatch(MovieActions.select(movie));`
+    * Change `handleClose` to instead dispatch the `MovieActions.select` action: `this.store.dispatch(MovieActions.select(null));`
+1. In `movie-list.component.html`,
+    * Anywhere `selectedMovie` is found, replace it with `(selectedMovie$ | async)`.
+
+This should take care of moving that data into Redux state.  I know, it's a lot of steps, but now
+this data is agnostic, and can be accessed and worked with from anywhere in the application.
+It can also be used in selectors to gather multiple pieces of state together and work with them.
+
+More on that in another training...
+
+#### Task 2: Move the `movie-details` component out of the `movie-list` component.
+
+1. In `movie-list.component.html`,
+    * Move the <app-movie-details> node into `app.component.html`.
+1. In `movie-list.compoennt.ts`,
+    * Move the `selectedMovie$` field to `app.component.ts`.
+    * Move the `handleClose()` function to `app.component.ts`.
+
+That's it!  You've so completely decoupled the `selectedMovie` from the `movie-list` state, that you can
+select (or deselect) a movie from either the `movie-list` component or the `movie-details` component.
+
+---------------
+
+# The End
+
+I hope you found this training enlightening and valuable, but I'd love to hear your feedback.
+If this isn't the kind of information you need, the kind of training you'd like, please let me
+know -- I can't get better if I don't get feedback!
+
+Regards,
+Doug
