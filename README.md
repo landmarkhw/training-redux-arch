@@ -234,8 +234,6 @@ There are still some concerns remaining that should be separated, that haven't b
 This final part of the workshop will involve (finally), you doing some coding.  Since this is a brand new concept,
 and for many (most) of you, Angular is a new technology, I'll walk you through it step-by-step.
 
-Note that you should **not** checkout the "part5" branch unless you want to see the end result without doing the work.
-
 #### Task 1: Move the `selectedMovie` into Redux state.
 
 1. In `movie.actions.ts`,
@@ -264,6 +262,12 @@ It can also be used in selectors to gather multiple pieces of state together and
 
 More on that in another training...
 
+---------------
+
+#### You can see the results so far by checking out the `part5-step1` branch
+
+---------------
+
 #### Task 2: Move the `movie-details` component out of the `movie-list` component.
 
 1. In `movie-list.component.html`,
@@ -280,6 +284,10 @@ More on that in another training...
 
 That's it!  You've so completely decoupled the `selectedMovie` from the `movie-list` state, that you can
 select (or deselect) a movie from either the `movie-list` component or the `movie-details` component.
+
+---------------
+
+#### You can see the final results by checking out the `part5-step2` branch
 
 ---------------
 
